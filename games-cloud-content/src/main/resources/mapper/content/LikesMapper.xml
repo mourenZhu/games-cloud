@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zhumouren.games.cloud.content.mapper.LikesMapper">
+
+    <select id="getContentLikeNumsMap" resultType="HashMap">
+        select content_id, count(*) as likeNums
+        from content_likes
+        group by content_id
+    </select>
+
+    <select id="getContentLikeUsernames" resultType="String">
+        select username
+        from content_likes
+        where content_id = #{contentId}
+    </select>
+
+    <select id="getUserLikeContentIdPage" resultType="Long">
+        select content_id
+        from content_likes
+        where username = #{username}
+    </select>
+
+</mapper>
