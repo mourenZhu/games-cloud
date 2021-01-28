@@ -9,7 +9,6 @@ import cn.zhumouren.games.cloud.content.utils.JwtUtils;
 import cn.zhumouren.games.cloud.content.utils.ListUtils;
 import cn.zhumouren.games.cloud.content.utils.UrlUtils;
 import cn.zhumouren.games.cloud.content.vo.ContentVO;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -83,7 +82,7 @@ public class ContentServiceImpl extends ServiceImpl<ContentMapper, Content> impl
 
         IPage<ContentVO> contentVOPage = new Page<>();
 
-        List<ContentVO> contentVOList = getContentVOList(page, contentId);
+        List<ContentVO> contentVOList = getContentVOLinkList(page, contentId);
 
 
         contentVOPage.setRecords(contentVOList);
@@ -96,13 +95,18 @@ public class ContentServiceImpl extends ServiceImpl<ContentMapper, Content> impl
 
     @Override
     public List<ContentVO> getContentVOList(List<Long> contentIdList) {
-        List<ContentVO> contentVOList = new LinkedList();
-
-        contentMapper.getContentList(contentIdList);
-
+        List<ContentVO> contentVOList;
+        List<Content> contentList = contentMapper.getContentList(contentIdList);
+        contentVOList = getContentVOListByContentList(contentList);
         return contentVOList;
     }
 
+    /**
+     * 通过contentList获得contentIdList（其实就是简单的分离一下）
+     *
+     * @param contentList
+     * @return
+     */
     private List<Long> getContentIdListByContentList(List<Content> contentList) {
         List<Long> idList = new ArrayList<>();
         for (Content c : contentList) {
@@ -111,22 +115,37 @@ public class ContentServiceImpl extends ServiceImpl<ContentMapper, Content> impl
         return idList;
     }
 
-    private List<ContentVO> getContentVOList(Page<Content> page, Long contentId) {
+    /**
+     * 把最基础的content对象封装成VO对象，代码简单，但内容较多，分离一下代码更美观。
+     *
+     * @param page
+     * @param contentId
+     * @return
+     */
+    private List<ContentVO> getContentVOLinkList(Page<Content> page, Long contentId) {
+        List<ContentVO> contentVOList;
+        List<Long> parentList = getContentParentPaths(contentId);
+        IPage<Content> contentLink = contentMapper.getContentLink(page, contentId, parentList);
+        List<Content> contentList = contentLink.getRecords();
+        contentVOList = getContentVOListByContentList(contentList);
+        return contentVOList;
+    }
+
+    /**
+     * 通过获得contentList把content包装成contentVO，因为有多个方法要共用这一段代码，所以分离一下。
+     * @param contentList
+     * @return
+     */
+    private List<ContentVO> getContentVOListByContentList(List<Content> contentList) {
 
         List<ContentVO> contentVOList = new LinkedList<>();
-
-        List<Long> parentList = getContentParentPaths(contentId);
-
-        IPage<Content> contentLink = contentMapper.getContentLink(page, contentId, parentList);
-
-        List<Content> contentList = contentLink.getRecords();
 
         List<Long> contentIdList = getContentIdListByContentList(contentList);
 
         Map<Long, Integer> contentLikeMap = likesService.getContentLikeNumsMap(contentIdList);
-        Map<Long, Integer> contentCommentMap = getContentCommentMap(contentIdList);
+        Map<Long, Integer> contentCommentMap = getContentCommentNumsMap(contentIdList);
         Map<Long, Integer> contentTranspondMap = transpondContentService.getContentTranspondNumsMap(contentIdList);
-        Map<Long, Integer> contentQuoteMap = getContentQuoteMap(contentIdList);
+        Map<Long, Integer> contentQuoteMap = getContentQuoteNumsMap(contentIdList);
 
         for (Content c : contentList) {
 
@@ -174,12 +193,12 @@ public class ContentServiceImpl extends ServiceImpl<ContentMapper, Content> impl
 
 
     @Override
-    public Map<Long, Integer> getContentCommentMap(List<Long> contentIdList) {
+    public Map<Long, Integer> getContentCommentNumsMap(List<Long> contentIdList) {
         return contentMapper.getContentCommentMap(contentIdList);
     }
 
     @Override
-    public Map<Long, Integer> getContentQuoteMap(List<Long> contentIdList) {
+    public Map<Long, Integer> getContentQuoteNumsMap(List<Long> contentIdList) {
         return contentMapper.getContentQuoteMap(contentIdList);
     }
 

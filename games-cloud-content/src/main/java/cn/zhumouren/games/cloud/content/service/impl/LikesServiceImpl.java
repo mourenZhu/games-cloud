@@ -1,7 +1,9 @@
 package cn.zhumouren.games.cloud.content.service.impl;
 
+import cn.zhumouren.games.cloud.content.entity.Content;
 import cn.zhumouren.games.cloud.content.entity.Likes;
 import cn.zhumouren.games.cloud.content.mapper.LikesMapper;
+import cn.zhumouren.games.cloud.content.service.IContentService;
 import cn.zhumouren.games.cloud.content.service.ILikesService;
 import cn.zhumouren.games.cloud.content.vo.ContentVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -15,7 +17,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author zhumouren
@@ -26,6 +28,9 @@ public class LikesServiceImpl extends ServiceImpl<LikesMapper, Likes> implements
 
     @Autowired
     private LikesMapper likesMapper;
+
+    @Autowired
+    private IContentService contentService;
 
     @Override
     public Map<Long, Integer> getContentLikeNumsMap(List<Long> contentIdList) {
@@ -38,14 +43,22 @@ public class LikesServiceImpl extends ServiceImpl<LikesMapper, Likes> implements
     }
 
     @Override
-    public IPage<ContentVO> getUserLikeContentVOPage(Page<ContentVO> page, String username) {
+    public IPage<ContentVO> getUserLikeContentVOPage(Page<Content> page, String username) {
         Page<Long> contentIdPage = new Page<>();
         contentIdPage.setSize(page.getSize());
         contentIdPage.setCurrent(page.getCurrent());
         contentIdPage.setTotal(page.getTotal());
         contentIdPage.setPages(page.getPages());
+
         IPage<Long> userLikeContentIdPage = likesMapper.getUserLikeContentIdPage(contentIdPage, username);
-        userLikeContentIdPage.getRecords();
-        return null;
+        List<Long> contentIdList = userLikeContentIdPage.getRecords();
+
+        IPage<ContentVO> contentVOIPage = new Page<>();
+        contentVOIPage.setRecords(contentService.getContentVOList(contentIdList));
+        contentVOIPage.setPages(userLikeContentIdPage.getPages());
+        contentVOIPage.setSize(userLikeContentIdPage.getSize());
+        contentVOIPage.setTotal(userLikeContentIdPage.getTotal());
+        contentVOIPage.setCurrent(userLikeContentIdPage.getCurrent());
+        return contentVOIPage;
     }
 }

@@ -1,6 +1,7 @@
 package cn.zhumouren.games.cloud.content.controller;
 
 
+import cn.zhumouren.games.cloud.content.constant.PageConstants;
 import cn.zhumouren.games.cloud.content.entity.Content;
 import cn.zhumouren.games.cloud.content.service.IContentService;
 import cn.zhumouren.games.cloud.content.utils.JwtUtils;
@@ -44,13 +45,8 @@ public class ContentController {
                                          @PathVariable("contentId") Long contentId,
                                          @RequestParam("current") Integer current,
                                          @RequestParam("size") Integer size) {
-        Page<Content> page;
-        if (current == null || size == null) {
-            page = new Page(1, 10);
-        } else {
-            page = new Page<>(current, size);
-        }
-
+        Page<Content> page = new Page<>();
+        PageConstants.constantPageConfig(page, current, size);
         return contentService.getContentLink(page, contentId);
     }
 
@@ -59,12 +55,8 @@ public class ContentController {
                                              @PathVariable("contentId") Long contentId,
                                              @RequestParam("current") Integer current,
                                              @RequestParam("size") Integer size) {
-        Page<Content> page;
-        if (current == null || size == null) {
-            page = new Page(1, 10);
-        } else {
-            page = new Page<>(current, size);
-        }
+        Page<Content> page = new Page<>();
+        PageConstants.constantPageConfig(page, current, size);
         return contentService.getContentVOLink(page, contentId);
     }
 
@@ -73,7 +65,7 @@ public class ContentController {
         return contentService.getById(contentId);
     }
 
-    public IPage<String> getContentQuoteUsernamePage(Long contentId){
+    public IPage<String> getContentQuoteUsernamePage(Long contentId) {
         return null;
     }
 }

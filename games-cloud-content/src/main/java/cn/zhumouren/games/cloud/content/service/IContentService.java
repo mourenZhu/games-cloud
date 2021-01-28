@@ -19,6 +19,12 @@ import java.util.Map;
  */
 public interface IContentService extends IService<Content> {
 
+    /**
+     * 提交内容
+     *
+     * @param content
+     * @return
+     */
     boolean postContent(Content content);
 
     /**
@@ -48,6 +54,14 @@ public interface IContentService extends IService<Content> {
     IPage<ContentVO> getContentVOLink(Page<Content> page, Long contentId);
 
     /**
+     * 通过contentIdList获得contentVOList
+     *
+     * @param contentIdList
+     * @return
+     */
+    List<ContentVO> getContentVOList(List<Long> contentIdList);
+
+    /**
      * 先获得根路径，再去获得全部内容链。
      *
      * @param contentId
@@ -62,5 +76,22 @@ public interface IContentService extends IService<Content> {
      * @param contentIdList
      * @return
      */
-    Map<Long , Integer> getContentCommentMap(List<Long> contentIdList);
+    Map<Long, Integer> getContentCommentNumsMap(List<Long> contentIdList);
+
+    /**
+     * 获得内容的引用数量
+     *
+     * @param contentIdList
+     * @return
+     */
+    Map<Long, Integer> getContentQuoteNumsMap(List<Long> contentIdList);
+
+    /**
+     * 获得引用了该条内容的用户
+     *
+     * @param page
+     * @param contentId
+     * @return
+     */
+    IPage<String> getContentQuoteUsernamePage(Page<String> page, Long contentId);
 }

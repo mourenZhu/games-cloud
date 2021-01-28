@@ -1,5 +1,6 @@
 package cn.zhumouren.games.cloud.content.service;
 
+import cn.zhumouren.games.cloud.content.entity.Content;
 import cn.zhumouren.games.cloud.content.entity.Likes;
 import cn.zhumouren.games.cloud.content.vo.ContentVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -43,5 +44,5 @@ public interface ILikesService extends IService<Likes> {
      * @param username
      * @return
      */
-    IPage<ContentVO> getUserLikeContentVOPage(Page<ContentVO> page, String username);
+    IPage<ContentVO> getUserLikeContentVOPage(Page<Content> page, String username);
 }
