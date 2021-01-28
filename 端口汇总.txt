@@ -1,0 +1,8 @@
+nacos : 192.168.3.4:8848
+nacos-mysql : 192.168.3.4:3306
+sentinel : 192.168.3.4:8888
+cloud-gateway : localhost:8080
+cloud-oauth2 : localhost:8088
+cloud-oauth2-mysql : 192.168.3136
+cloud-content : localhost:8101
+cloud-content-mysql : 192.168.3.4:3001
