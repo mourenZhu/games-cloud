@@ -15,14 +15,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TranspondContent implements Serializable {
+public class ForwardMoment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * id
      */
-    private Long contentId;
+    private Long momentId;
 
     /**
      * 引用者用户

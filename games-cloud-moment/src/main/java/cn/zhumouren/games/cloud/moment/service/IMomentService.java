@@ -1,7 +1,7 @@
 package cn.zhumouren.games.cloud.moment.service;
 
-import cn.zhumouren.games.cloud.moment.entity.Content;
-import cn.zhumouren.games.cloud.moment.vo.ContentVO;
+import cn.zhumouren.games.cloud.moment.entity.Moment;
+import cn.zhumouren.games.cloud.moment.vo.MomentVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -17,81 +17,81 @@ import java.util.Map;
  * @author zhumouren
  * @since 2021-01-19
  */
-public interface IContentService extends IService<Content> {
+public interface IMomentService extends IService<Moment> {
 
     /**
      * 提交内容
      *
-     * @param content
+     * @param moment
      * @return
      */
-    boolean postContent(Content content);
+    boolean postMoment(Moment moment);
 
     /**
      * 删除内容，但不是真删
      *
-     * @param content
+     * @param moment
      * @param token
      * @return
      */
-    boolean deleteContent(Content content, String token);
+    boolean deleteMoment(Moment moment, String token);
 
     /**
      * 通过contentId来获得内容链
      *
-     * @param contentId
+     * @param momentId
      * @return
      */
-    IPage<Content> getContentLink(Page<Content> page, Long contentId);
+    IPage<Moment> getMomentLinkPage(Page<Moment> page, Long momentId);
 
     /**
      * 通过contentId来获得内容链(显示层需要的VO)
      *
      * @param page
-     * @param contentId
+     * @param momentId
      * @return
      */
-    IPage<ContentVO> getContentVOLink(Page<Content> page, Long contentId);
+    IPage<MomentVO> getMomentVOLinkPage(Page<Moment> page, Long momentId);
 
     /**
      * 通过contentIdList获得contentVOList
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    List<ContentVO> getContentVOList(List<Long> contentIdList);
+    List<MomentVO> listMomentVOs(List<Long> momentIdList);
 
     /**
      * 先获得根路径，再去获得全部内容链。
      *
-     * @param contentId
+     * @param momentId
      * @return
      */
-    List<Long> getContentParentPaths(Long contentId);
+    List<Long> listMomentParentPaths(Long momentId);
 
 
     /**
      * 获得内容列表的评论数map
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentCommentNumsMap(List<Long> contentIdList);
+    Map<Long, Integer> getMomentCommentNumsMap(List<Long> momentIdList);
 
     /**
      * 获得内容的引用数量
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentQuoteNumsMap(List<Long> contentIdList);
+    Map<Long, Integer> getMomentQuoteNumsMap(List<Long> momentIdList);
 
     /**
      * 获得引用了该条内容的用户
      *
      * @param page
-     * @param contentId
+     * @param momentId
      * @return
      */
-    IPage<String> getContentQuoteUsernamePage(Page<String> page, Long contentId);
+    IPage<String> getMomentQuoteUsernamePage(Page<String> page, Long momentId);
 }

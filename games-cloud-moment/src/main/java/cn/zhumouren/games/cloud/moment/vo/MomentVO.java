@@ -1,6 +1,6 @@
 package cn.zhumouren.games.cloud.moment.vo;
 
-import cn.zhumouren.games.cloud.moment.entity.Content;
+import cn.zhumouren.games.cloud.moment.entity.Moment;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,15 +12,15 @@ import java.io.Serializable;
  * @Version 1.0
  **/
 @Data
-public class ContentVO implements Serializable {
+public class MomentVO implements Serializable {
 
-    private Content content;
+    private Moment moment;
 
     private Integer likeNums;
 
     private Integer commentNums;
 
-    private Integer transpondNums;
+    private Integer forwardNums;
 
     private Integer quoteNums;
 }

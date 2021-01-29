@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ContentCodeGenerator {
+public class MomentCodeGenerator {
 
     /**
      * <p>
@@ -51,11 +51,11 @@ public class ContentCodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.3.4:3001/games_cloud_content?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        dsc.setUrl("jdbc:mysql://192.168.3.4:3002/games_cloud_moment?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("clear@content");
+        dsc.setPassword("clear@moment");
         mpg.setDataSource(dsc);
 
         // 包配置

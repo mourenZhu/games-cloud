@@ -1,6 +1,6 @@
 package cn.zhumouren.games.cloud.moment.service;
 
-import cn.zhumouren.games.cloud.moment.entity.TranspondContent;
+import cn.zhumouren.games.cloud.moment.entity.ForwardMoment;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -14,14 +14,14 @@ import java.util.Map;
  * @author zhumouren
  * @since 2021-01-19
  */
-public interface ITranspondContentService extends IService<TranspondContent> {
+public interface IForwardMomentService extends IService<ForwardMoment> {
 
     /**
      * 获得内容转发数map
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentTranspondNumsMap(List<Long> contentIdList);
+    Map<Long, Integer> getMomentForwardNumsMap(List<Long> momentIdList);
 
 }

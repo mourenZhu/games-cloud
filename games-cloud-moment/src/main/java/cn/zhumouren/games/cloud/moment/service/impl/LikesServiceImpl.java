@@ -1,11 +1,11 @@
 package cn.zhumouren.games.cloud.moment.service.impl;
 
-import cn.zhumouren.games.cloud.moment.entity.Content;
+import cn.zhumouren.games.cloud.moment.entity.Moment;
 import cn.zhumouren.games.cloud.moment.entity.Likes;
 import cn.zhumouren.games.cloud.moment.mapper.LikesMapper;
-import cn.zhumouren.games.cloud.moment.service.IContentService;
+import cn.zhumouren.games.cloud.moment.service.IMomentService;
 import cn.zhumouren.games.cloud.moment.service.ILikesService;
-import cn.zhumouren.games.cloud.moment.vo.ContentVO;
+import cn.zhumouren.games.cloud.moment.vo.MomentVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -30,35 +30,35 @@ public class LikesServiceImpl extends ServiceImpl<LikesMapper, Likes> implements
     private LikesMapper likesMapper;
 
     @Autowired
-    private IContentService contentService;
+    private IMomentService momentService;
 
     @Override
-    public Map<Long, Integer> getContentLikeNumsMap(List<Long> contentIdList) {
-        return likesMapper.getContentLikeNumsMap(contentIdList);
+    public Map<Long, Integer> getMomentLikeNumsMap(List<Long> momentIdList) {
+        return likesMapper.getMomentLikeNumsMap(momentIdList);
     }
 
     @Override
-    public IPage<String> getContentLikeUsernames(Page<String> page, Long contentId) {
-        return likesMapper.getContentLikeUsernames(page, contentId);
+    public IPage<String> getMomentLikeUsernamePage(Page<String> page, Long momentId) {
+        return likesMapper.getMomentLikeUsernamePage(page, momentId);
     }
 
     @Override
-    public IPage<ContentVO> getUserLikeContentVOPage(Page<Content> page, String username) {
-        Page<Long> contentIdPage = new Page<>();
-        contentIdPage.setSize(page.getSize());
-        contentIdPage.setCurrent(page.getCurrent());
-        contentIdPage.setTotal(page.getTotal());
-        contentIdPage.setPages(page.getPages());
+    public IPage<MomentVO> getUserLikeMomentVOPage(Page<Moment> page, String username) {
+        Page<Long> momentIdPage = new Page<>();
+        momentIdPage.setSize(page.getSize());
+        momentIdPage.setCurrent(page.getCurrent());
+        momentIdPage.setTotal(page.getTotal());
+        momentIdPage.setPages(page.getPages());
 
-        IPage<Long> userLikeContentIdPage = likesMapper.getUserLikeContentIdPage(contentIdPage, username);
-        List<Long> contentIdList = userLikeContentIdPage.getRecords();
+        IPage<Long> userLikeMomentIdPage = likesMapper.getUserLikeMomentIdPage(momentIdPage, username);
+        List<Long> momentIdList = userLikeMomentIdPage.getRecords();
 
-        IPage<ContentVO> contentVOIPage = new Page<>();
-        contentVOIPage.setRecords(contentService.getContentVOList(contentIdList));
-        contentVOIPage.setPages(userLikeContentIdPage.getPages());
-        contentVOIPage.setSize(userLikeContentIdPage.getSize());
-        contentVOIPage.setTotal(userLikeContentIdPage.getTotal());
-        contentVOIPage.setCurrent(userLikeContentIdPage.getCurrent());
-        return contentVOIPage;
+        IPage<MomentVO> momentVOIPage = new Page<>();
+        momentVOIPage.setRecords(momentService.listMomentVOs(momentIdList));
+        momentVOIPage.setPages(userLikeMomentIdPage.getPages());
+        momentVOIPage.setSize(userLikeMomentIdPage.getSize());
+        momentVOIPage.setTotal(userLikeMomentIdPage.getTotal());
+        momentVOIPage.setCurrent(userLikeMomentIdPage.getCurrent());
+        return momentVOIPage;
     }
 }

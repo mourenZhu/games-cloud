@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.zhumouren.games.cloud.moment.mapper.ContentMapper">
+<mapper namespace="cn.zhumouren.games.cloud.moment.mapper.MomentMapper">
 
-    <select id="getContentLink" resultType="cn.zhumouren.games.cloud.moment.entity.Content">
+    <select id="getMomentLinkPage" resultType="cn.zhumouren.games.cloud.moment.entity.Moment">
         select id,
         parent_id,
         parent_paths,
@@ -14,15 +14,15 @@
         created,
         updated,
         is_delete
-        from content
-        where parent_id = #{contentId} or id in
+        from moment
+        where parent_id = #{momentId} or id in
         <foreach item="parentId" collection="parentList" open="(" close=")" separator=",">
             #{parentId}
         </foreach>
         order by created
     </select>
 
-    <select id="getContentList" resultType="cn.zhumouren.games.cloud.moment.entity.Content">
+    <select id="listMoment" resultType="cn.zhumouren.games.cloud.moment.entity.Moment">
         select id,
         parent_id,
         parent_paths,
@@ -30,41 +30,41 @@
         username,
         url,
         pics,
-        content,
+        cotent,
         created,
         updated,
         is_delete
-        from content
+        from moment
         where id in
-        <foreach item="contentId" collection="contentIdList" open="(" close=")" separator=",">
-            #{contentId}
+        <foreach item="momentId" collection="momentIdList" open="(" close=")" separator=",">
+            #{momentId}
         </foreach>
     </select>
 
-    <select id="getContentCommentMap" resultType="HashMap">
+    <select id="getMomentCommentMap" resultType="HashMap">
         select parent_id, count(parent_id) as commentNums
-        from content
+        from moment
         where parent_id in
-        <foreach item="parentId" collection="contentIdList" open="(" close=")" separator=",">
+        <foreach item="parentId" collection="momentIdList" open="(" close=")" separator=",">
             #{parentId}
         </foreach>
         group by parent_id
     </select>
 
-    <select id="getContentQuoteMap" resultType="HashMap">
+    <select id="getMomentQuoteMap" resultType="HashMap">
         select quote_id, count(quote_id) as quoteNums
-        from content
+        from moment
         where quote_id in
-        <foreach item="parentId" collection="contentIdList" open="(" close=")" separator=",">
+        <foreach item="parentId" collection="momentIdList" open="(" close=")" separator=",">
             #{parentId}
         </foreach>
         group by quote_id
     </select>
 
-    <select id="getContentQuoteUsernamePage" resultType="String">
+    <select id="getMomentQuoteUsernamePage" resultType="String">
         select username
-        from content
-        where quote_id = #{contentId}
+        from moment
+        where quote_id = #{momentId}
     </select>
 
 </mapper>

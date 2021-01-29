@@ -24,19 +24,19 @@ public interface LikesMapper extends BaseMapper<Likes> {
     /**
      * 获得内容点赞数map
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentLikeNumsMap(@Param("contentIdList") List<Long> contentIdList);
+    Map<Long, Integer> getMomentLikeNumsMap(@Param("momentIdList") List<Long> momentIdList);
 
     /**
      * 获得点赞了该条内容的用户
      *
      * @param page
-     * @param contentId
+     * @param momentId
      * @return
      */
-    IPage<String> getContentLikeUsernames(Page<String> page, @Param("contentId") Long contentId);
+    IPage<String> getMomentLikeUsernamePage(Page<String> page, @Param("momentId") Long momentId);
 
     /**
      * 获得用户点赞了的内容
@@ -45,5 +45,5 @@ public interface LikesMapper extends BaseMapper<Likes> {
      * @param username
      * @return
      */
-    IPage<Long> getUserLikeContentIdPage(Page<Long> page, @Param("username") String username);
+    IPage<Long> getUserLikeMomentIdPage(Page<Long> page, @Param("username") String username);
 }

@@ -10,8 +10,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @MapperScan("cn.zhumouren.games.cloud.content.mapper")
 @EnableDiscoveryClient
 @EnableFeignClients
-public class ContentApplication {
+public class MomentApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ContentApplication.class, args);
+        SpringApplication.run(MomentApplication.class, args);
     }
 }

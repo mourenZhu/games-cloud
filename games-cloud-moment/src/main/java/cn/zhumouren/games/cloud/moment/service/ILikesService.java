@@ -1,8 +1,8 @@
 package cn.zhumouren.games.cloud.moment.service;
 
-import cn.zhumouren.games.cloud.moment.entity.Content;
+import cn.zhumouren.games.cloud.moment.entity.Moment;
 import cn.zhumouren.games.cloud.moment.entity.Likes;
-import cn.zhumouren.games.cloud.moment.vo.ContentVO;
+import cn.zhumouren.games.cloud.moment.vo.MomentVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -23,19 +23,19 @@ public interface ILikesService extends IService<Likes> {
     /**
      * 获得内容点赞数map
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentLikeNumsMap(List<Long> contentIdList);
+    Map<Long, Integer> getMomentLikeNumsMap(List<Long> momentIdList);
 
     /**
      * 获得点赞了该条内容的用户
      *
      * @param page
-     * @param contentId
+     * @param momentId
      * @return
      */
-    IPage<String> getContentLikeUsernames(Page<String> page, Long contentId);
+    IPage<String> getMomentLikeUsernamePage(Page<String> page, Long momentId);
 
     /**
      * 获得用户点赞了的内容
@@ -44,5 +44,5 @@ public interface ILikesService extends IService<Likes> {
      * @param username
      * @return
      */
-    IPage<ContentVO> getUserLikeContentVOPage(Page<Content> page, String username);
+    IPage<MomentVO> getUserLikeMomentVOPage(Page<Moment> page, String username);
 }

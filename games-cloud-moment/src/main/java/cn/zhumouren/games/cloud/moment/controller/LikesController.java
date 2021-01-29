@@ -1,7 +1,7 @@
 package cn.zhumouren.games.cloud.moment.controller;
 
 
-import cn.zhumouren.games.cloud.moment.entity.Content;
+import cn.zhumouren.games.cloud.moment.entity.Moment;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class  LikesController {
         return false;
     }
 
-    public IPage<Content> getUserLikes(){
+    public IPage<Moment> getUserLikes(){
 
         return null;
     }

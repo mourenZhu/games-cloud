@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Content implements Serializable {
+public class Moment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

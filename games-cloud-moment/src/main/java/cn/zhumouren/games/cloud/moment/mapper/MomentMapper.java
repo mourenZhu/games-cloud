@@ -1,6 +1,6 @@
 package cn.zhumouren.games.cloud.moment.mapper;
 
-import cn.zhumouren.games.cloud.moment.entity.Content;
+import cn.zhumouren.games.cloud.moment.entity.Moment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -19,46 +19,46 @@ import java.util.Map;
  * @since 2021-01-19
  */
 @Repository
-public interface ContentMapper extends BaseMapper<Content> {
+public interface MomentMapper extends BaseMapper<Moment> {
 
     /**
      * 通过contentId来获得内容链
      *
-     * @param contentId
+     * @param momentId
      * @return
      */
-    IPage<Content> getContentLink(Page<?> page, @Param("contentId") Long contentId, @Param("parentList") List<Long> parentPathsList);
+    IPage<Moment> getMomentLinkPage(Page<?> page, @Param("momentId") Long momentId, @Param("parentList") List<Long> parentPathsList);
 
     /**
-     * 通过contentIdList获得contentList
-     * @param contentIdList
+     * 通过momentIdList获得momentList
+     * @param momentIdList
      * @return
      */
-    List<Content> getContentList(@Param("contentIdList") List<Long> contentIdList);
+    List<Moment> listMoment(@Param("momentIdList") List<Long> momentIdList);
 
     /**
      * 获得内容列表的评论数map
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentCommentMap(@Param("contentIdList") List<Long> contentIdList);
+    Map<Long, Integer> getMomentCommentMap(@Param("momentIdList") List<Long> momentIdList);
 
     /**
      * 获得内容列表的引用数map
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentQuoteMap(@Param("contentIdList") List<Long> contentIdList);
+    Map<Long, Integer> getMomentQuoteMap(@Param("momentIdList") List<Long> momentIdList);
 
     /**
      * 获得引用了该内容的用户
      *
      * @param page
-     * @param contentId
+     * @param momentId
      * @return
      */
-    IPage<String> getContentQuoteUsernamePage(Page<String> page, @Param("contentId") Long contentId);
+    IPage<String> getMomentQuoteUsernamePage(Page<String> page, @Param("momentId") Long momentId);
 
 }

@@ -10,7 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>games-cloud-content</artifactId>
+    <artifactId>games-cloud-moment</artifactId>
     <packaging>jar</packaging>
 
     <licenses>
@@ -131,7 +131,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.zhumouren.games.cloud.users.UserApplication</mainClass>
+                    <mainClass>cn.zhumouren.games.cloud.moment.MomentApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

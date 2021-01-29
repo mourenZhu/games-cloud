@@ -1,6 +1,6 @@
 package cn.zhumouren.games.cloud.moment.mapper;
 
-import cn.zhumouren.games.cloud.moment.entity.TranspondContent;
+import cn.zhumouren.games.cloud.moment.entity.ForwardMoment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -17,14 +17,14 @@ import java.util.Map;
  * @since 2021-01-19
  */
 @Repository
-public interface TranspondContentMapper extends BaseMapper<TranspondContent> {
+public interface ForwardMomentMapper extends BaseMapper<ForwardMoment> {
 
     /**
      * 获得内容转发数map
      *
-     * @param contentIdList
+     * @param momentIdList
      * @return
      */
-    Map<Long, Integer> getContentTranspondNumsMap(@Param("contentIdList") List<Long> contentIdList);
+    Map<Long, Integer> getMomentForwardNumsMap(@Param("momentIdList") List<Long> momentIdList);
 
 }
