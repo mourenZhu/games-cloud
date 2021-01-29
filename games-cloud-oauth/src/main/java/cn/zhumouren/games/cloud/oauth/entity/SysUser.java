@@ -31,11 +31,6 @@ public class SysUser implements Serializable {
     private String password;
 
     /**
-     * 用户昵称
-     */
-    private String nickname;
-
-    /**
      * 注册手机号
      */
     private String phone;

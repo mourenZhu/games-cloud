@@ -28,7 +28,7 @@
 		<module>games-cloud-users</module>
 		<module>games-cloud-gateway</module>
 		<module>games-cloud-oauth</module>
-		<module>games-cloud-content</module>
+		<module>games-cloud-moment</module>
 	</modules>
 
 	<dependencies>
