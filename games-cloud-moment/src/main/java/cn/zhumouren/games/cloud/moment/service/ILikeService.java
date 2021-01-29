@@ -1,7 +1,7 @@
 package cn.zhumouren.games.cloud.moment.service;
 
 import cn.zhumouren.games.cloud.moment.entity.Moment;
-import cn.zhumouren.games.cloud.moment.entity.Likes;
+import cn.zhumouren.games.cloud.moment.entity.Like;
 import cn.zhumouren.games.cloud.moment.vo.MomentVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -18,7 +18,7 @@ import java.util.Map;
  * @author zhumouren
  * @since 2021-01-19
  */
-public interface ILikesService extends IService<Likes> {
+public interface ILikeService extends IService<Like> {
 
     /**
      * 获得内容点赞数map

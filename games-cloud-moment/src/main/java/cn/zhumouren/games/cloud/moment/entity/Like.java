@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("content_likes")
-public class Likes implements Serializable {
+public class Like implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

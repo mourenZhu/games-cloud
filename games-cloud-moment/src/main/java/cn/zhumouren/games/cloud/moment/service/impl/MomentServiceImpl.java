@@ -3,7 +3,7 @@ package cn.zhumouren.games.cloud.moment.service.impl;
 import cn.zhumouren.games.cloud.moment.entity.Moment;
 import cn.zhumouren.games.cloud.moment.mapper.MomentMapper;
 import cn.zhumouren.games.cloud.moment.service.IMomentService;
-import cn.zhumouren.games.cloud.moment.service.ILikesService;
+import cn.zhumouren.games.cloud.moment.service.ILikeService;
 import cn.zhumouren.games.cloud.moment.service.IForwardMomentService;
 import cn.zhumouren.games.cloud.moment.utils.JwtUtils;
 import cn.zhumouren.games.cloud.moment.utils.ListUtils;
@@ -38,7 +38,7 @@ public class MomentServiceImpl extends ServiceImpl<MomentMapper, Moment> impleme
     private MomentMapper momentMapper;
 
     @Autowired
-    private ILikesService likesService;
+    private ILikeService likesService;
 
     @Autowired
     private IForwardMomentService forwardMomentService;

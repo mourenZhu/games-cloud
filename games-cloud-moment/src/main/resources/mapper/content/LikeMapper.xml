@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.zhumouren.games.cloud.moment.mapper.LikesMapper">
+<mapper namespace="cn.zhumouren.games.cloud.moment.mapper.LikeMapper">
 
     <select id="getMomentLikeNumsMap" resultType="HashMap">
         select moment_id, count(*) as likeNums

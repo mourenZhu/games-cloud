@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping
-public class  LikesController {
+public class LikeController {
 
     @PostMapping("/likes")
     public boolean postLike(@RequestParam("contentId") Long contentId,

@@ -1,6 +1,6 @@
 package cn.zhumouren.games.cloud.moment.mapper;
 
-import cn.zhumouren.games.cloud.moment.entity.Likes;
+import cn.zhumouren.games.cloud.moment.entity.Like;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @since 2021-01-19
  */
 @Repository
-public interface LikesMapper extends BaseMapper<Likes> {
+public interface LikeMapper extends BaseMapper<Like> {
 
     /**
      * 获得内容点赞数map

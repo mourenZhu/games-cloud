@@ -1,10 +1,10 @@
 package cn.zhumouren.games.cloud.moment.service.impl;
 
 import cn.zhumouren.games.cloud.moment.entity.Moment;
-import cn.zhumouren.games.cloud.moment.entity.Likes;
-import cn.zhumouren.games.cloud.moment.mapper.LikesMapper;
+import cn.zhumouren.games.cloud.moment.entity.Like;
+import cn.zhumouren.games.cloud.moment.mapper.LikeMapper;
 import cn.zhumouren.games.cloud.moment.service.IMomentService;
-import cn.zhumouren.games.cloud.moment.service.ILikesService;
+import cn.zhumouren.games.cloud.moment.service.ILikeService;
 import cn.zhumouren.games.cloud.moment.vo.MomentVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -24,22 +24,22 @@ import java.util.Map;
  * @since 2021-01-19
  */
 @Service
-public class LikesServiceImpl extends ServiceImpl<LikesMapper, Likes> implements ILikesService {
+public class LikeServiceImpl extends ServiceImpl<LikeMapper, Like> implements ILikeService {
 
     @Autowired
-    private LikesMapper likesMapper;
+    private LikeMapper likeMapper;
 
     @Autowired
     private IMomentService momentService;
 
     @Override
     public Map<Long, Integer> getMomentLikeNumsMap(List<Long> momentIdList) {
-        return likesMapper.getMomentLikeNumsMap(momentIdList);
+        return likeMapper.getMomentLikeNumsMap(momentIdList);
     }
 
     @Override
     public IPage<String> getMomentLikeUsernamePage(Page<String> page, Long momentId) {
-        return likesMapper.getMomentLikeUsernamePage(page, momentId);
+        return likeMapper.getMomentLikeUsernamePage(page, momentId);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class LikesServiceImpl extends ServiceImpl<LikesMapper, Likes> implements
         momentIdPage.setTotal(page.getTotal());
         momentIdPage.setPages(page.getPages());
 
-        IPage<Long> userLikeMomentIdPage = likesMapper.getUserLikeMomentIdPage(momentIdPage, username);
+        IPage<Long> userLikeMomentIdPage = likeMapper.getUserLikeMomentIdPage(momentIdPage, username);
         List<Long> momentIdList = userLikeMomentIdPage.getRecords();
 
         IPage<MomentVO> momentVOIPage = new Page<>();
